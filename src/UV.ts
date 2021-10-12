@@ -180,9 +180,11 @@ class UV {
   constructor(options: { target: HTMLDivElement; data: any }) {
     this.options = options;
     this.options.data = Object.assign({}, this.data(), options.data);
+    this.init();
+    this.resize();
   }
 
-  protected _init(): boolean {
+  public init(): boolean {
     this.el = this.options.target;
 
     if (!this.el) {
@@ -190,7 +192,9 @@ class UV {
       return false;
     }
 
-    this.el.innerHTML = "";
+    this.el.innerHTML = "Hello World";
+
+    // this._pubsub = new PubSub();
 
     return true;
   }
