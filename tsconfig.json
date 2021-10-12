@@ -1,0 +1,38 @@
+{
+  "compilerOptions": {
+    "incremental": true,
+    "module": "ESNext",
+    "sourceMap": true,
+    "noImplicitAny": false,
+    "noImplicitReturns": true,
+    "moduleResolution": "node",
+    "noImplicitThis": false,
+    "noLib": false,
+    "lib": [
+      "ES2015",
+      "DOM"
+    ],
+    "noUnusedLocals": true,
+    "noUnusedParameters": false,
+    "removeComments": false,
+    "strictNullChecks": true,
+    "suppressImplicitAnyIndexErrors": true,
+    "target": "ES5",
+    "tsBuildInfoFile": "./buildcache/front-end",
+    "types": [
+      "@edsilv/jquery-plugins",
+      "@iiif/base-component",
+      "jest",
+      "jquery",
+      "node"
+    ]
+  },
+  "exclude": [
+    "node_modules",
+    "src/**/*.test.ts",
+    "src/**/*.spec.ts"
+  ],
+  "include": [
+    "src"
+  ]
+}
