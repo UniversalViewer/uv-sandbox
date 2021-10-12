@@ -1,3 +1,64 @@
+export interface IUVOptions {
+  target: HTMLElement;
+  data?: any;
+}
+
+class UV {
+  public options: IUVOptions;
+  public el: HTMLElement;
+  private _e: any;
+
+  constructor(options: { target: HTMLDivElement; data: any }) {
+    this.options = options;
+    this.options.data = Object.assign({}, this.data(), options.data);
+    this.init();
+    this.resize();
+  }
+
+  public init(): boolean {
+    this.el = this.options.target;
+
+    if (!this.el) {
+      console.warn("element not found");
+      return false;
+    }
+
+    this.el.innerHTML = "Hello World";
+
+    // this._pubsub = new PubSub();
+
+    return true;
+  }
+
+  public data(): Object {
+    return {};
+  }
+
+  public on(name: string, callback: Function, ctx: any): void {
+    var e = this._e || (this._e = {});
+
+    (e[name] || (e[name] = [])).push({
+      fn: callback,
+      ctx: ctx,
+    });
+  }
+
+  public fire(name: string, ...args: any[]): void {
+    var data = [].slice.call(arguments, 1);
+    var evtArr = ((this._e || (this._e = {}))[name] || []).slice();
+    var i = 0;
+    var len = evtArr.length;
+
+    for (i; i < len; i++) {
+      evtArr[i].fn.apply(evtArr[i].ctx, data);
+    }
+  }
+
+  public resize(): void {}
+
+  public set(_data: Object): void {}
+}
+
 export const init = (el: string | HTMLDivElement, data) => {
   let uv;
   let isFullScreen = false;
@@ -165,65 +226,4 @@ function getExitFullScreen() {
   }
 
   return false;
-}
-
-export interface IUVOptions {
-  target: HTMLElement;
-  data?: any;
-}
-
-class UV {
-  public options: IUVOptions;
-  public el: HTMLElement;
-  private _e: any;
-
-  constructor(options: { target: HTMLDivElement; data: any }) {
-    this.options = options;
-    this.options.data = Object.assign({}, this.data(), options.data);
-    this.init();
-    this.resize();
-  }
-
-  public init(): boolean {
-    this.el = this.options.target;
-
-    if (!this.el) {
-      console.warn("element not found");
-      return false;
-    }
-
-    this.el.innerHTML = "Hello World";
-
-    // this._pubsub = new PubSub();
-
-    return true;
-  }
-
-  public data(): Object {
-    return {};
-  }
-
-  public on(name: string, callback: Function, ctx: any): void {
-    var e = this._e || (this._e = {});
-
-    (e[name] || (e[name] = [])).push({
-      fn: callback,
-      ctx: ctx,
-    });
-  }
-
-  public fire(name: string, ...args: any[]): void {
-    var data = [].slice.call(arguments, 1);
-    var evtArr = ((this._e || (this._e = {}))[name] || []).slice();
-    var i = 0;
-    var len = evtArr.length;
-
-    for (i; i < len; i++) {
-      evtArr[i].fn.apply(evtArr[i].ctx, data);
-    }
-  }
-
-  public resize(): void {}
-
-  public set(_data: Object): void {}
 }
