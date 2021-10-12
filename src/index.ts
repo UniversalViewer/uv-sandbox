@@ -1,1 +1,1 @@
-document.querySelector("#root").innerHTML = "Hello World 🌎";
+export { init } from "./UV";

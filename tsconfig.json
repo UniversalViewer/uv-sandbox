@@ -20,10 +20,10 @@
     "target": "ES5",
     "tsBuildInfoFile": "./buildcache/front-end",
     "types": [
-      "@edsilv/jquery-plugins",
-      "@iiif/base-component",
-      "jest",
-      "jquery",
+      //"@edsilv/jquery-plugins",
+      //"@iiif/base-component",
+      //"jest",
+      //"jquery",
       "node"
     ]
   },
